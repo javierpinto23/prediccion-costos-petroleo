@@ -70,10 +70,10 @@ if submit:
 
     # Realizar la predicción
     try:
-        resultado = model.predict(input_df)
+        resultado = model.predict(input_df)[0]*costo_planeado
         
         # Mostrar resultado con diseño llamativo
-        st.success(f"### Estimación Final: ${resultado[0]:,.2f} USD")
+        st.success(f"### Estimación Final: ${resultado:,.2f} USD")
         
         # Comparación visual
         diferencia = resultado[0] - costo_planeado
@@ -84,4 +84,5 @@ if submit:
                   delta=f"{porcentaje:.2f}%", 
                   delta_color="inverse")
     except Exception as e:
+
         st.error(f"Error en la predicción: {e}. Asegúrate de que las columnas coincidan con el entrenamiento.")
